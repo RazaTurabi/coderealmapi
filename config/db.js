@@ -7,7 +7,10 @@ const pool = mysql.createPool({
   database: 'u217412984_coderealm',
   waitForConnections: true,
   connectionLimit: 10,
-  queueLimit: 0
+  queueLimit: 0,
+  connectTimeout: 10000, // 10 seconds
+  enableKeepAlive: true,
+  keepAliveInitialDelay: 10000,
 });
 
 // Test the connection immediately
