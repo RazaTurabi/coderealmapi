@@ -1,0 +1,23 @@
+const mysql = require('mysql2');
+
+const pool = mysql.createPool({
+  host: 'localhost',
+  user: 'root',
+  password: '', // empty password for XAMPP default
+  database: 'coderealm',
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
+});
+
+// Test the connection immediately
+pool.getConnection((err, connection) => {
+  if (err) {
+    console.error('Error connecting to MySQL:', err);
+    process.exit(1); // Exit if we can't connect
+  }
+  console.log('Successfully connected to MySQL');
+  connection.release();
+});
+
+module.exports = pool.promise();

@@ -1,0 +1,81 @@
+# .gitignore for Node.js + MySQL Form API Project
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+.pnpm-debug.log
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# IDE and Editor
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# macOS
+.DS_Store
+
+# Database
+*.sql
+*.dump
+/db-backups/
+
+# XAMPP/MAMP specific
+/xampp/
+/mamp/
+/htdocs/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Debug
+debug.log
+
+# Local development files
+tmp/
+temp/
+
+# Config files that might contain secrets
+config/local.json
+*.config.js
+
+# Build directories
+dist/
+build/
+out/
+.next/
+
+# Testing
+/test-results.xml
+
+# Package manager specific
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# MySQL (optional - if you have local MySQL files)
+*.ibd
+*.frm
+*.myd
+*.myi
+*.trg
+*.tmd
+ib_logfile*
+ibdata*
