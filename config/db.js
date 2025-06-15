@@ -1,7 +1,7 @@
 const mysql = require('mysql2');
 
 const pool = mysql.createPool({
-  host: 'localhost',
+  host: 'srv1552.hstgr.io',
   user: 'u217412984_coderealm',
   password: '@Consolelog3', // empty password for XAMPP default
   database: 'u217412984_coderealm',
