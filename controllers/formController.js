@@ -3,15 +3,17 @@ const Enquiry = require('../models/enquiryModel');
 
 exports.submitForm = async (req, res, next) => {
   try {
-    const { name, type, enquiry, companyName, phone, countryCode } = req.body;
+    const { name, type, enquiry, companyName, phone } = req.body;
 
-    if (!name || !type || !enquiry || !phone || !countryCode) {
+    // Validate required fields
+    if (!name || !type || !enquiry || !phone) {
       return res.status(400).json({
         error: 'Validation failed',
         details: 'All required fields must be provided'
       });
     }
 
+    // Validate type
     if (!['company', 'individual'].includes(type)) {
       return res.status(400).json({
         error: 'Validation failed',
@@ -19,6 +21,7 @@ exports.submitForm = async (req, res, next) => {
       });
     }
 
+    // Company name required if type is company
     if (type === 'company' && !companyName) {
       return res.status(400).json({
         error: 'Validation failed',
@@ -26,13 +29,13 @@ exports.submitForm = async (req, res, next) => {
       });
     }
 
+    // Prepare submission
     const submission = {
       name,
       type,
       enquiry,
-      companyName: type === 'company' ? companyName : '',
       phone,
-      countryCode
+      companyName: type === 'company' ? companyName : ''
     };
 
     await Form.create(submission);
@@ -52,7 +55,7 @@ exports.initializeDatabase = async () => {
     console.log('Database table initialized');
   } catch (error) {
     console.error('Error initializing database:', error);
-    throw error; // Rethrow to handle in app.js
+    throw error;
   }
 };
 
@@ -68,6 +71,7 @@ exports.submitEnquiry = async (req, res) => {
     }
 
     await Enquiry.create({ email, date });
+
     res.status(200).json({
       success: true,
       message: 'Enquiry submitted successfully'
@@ -81,7 +85,6 @@ exports.submitEnquiry = async (req, res) => {
   }
 };
 
-// add table init
 exports.initializeEnquiryTable = async () => {
   try {
     await Enquiry.setupTable();
