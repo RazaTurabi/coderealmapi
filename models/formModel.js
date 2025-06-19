@@ -15,10 +15,10 @@ class Form {
   }
 
   static async setupTable() {
-  // Drop table first if exists
+  // Drop old table if it exists
   await db.execute(`DROP TABLE IF EXISTS submissions`);
 
-  // Then create it fresh
+  // Then create fresh table
   await db.execute(`
     CREATE TABLE submissions (
       id INT AUTO_INCREMENT PRIMARY KEY,
