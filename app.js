@@ -24,6 +24,15 @@ formController.initializeDatabase().catch(err => {
   console.error('Database initialization failed:', err);
 });
 
+formController.initializeDatabase().catch(err => {
+  console.error('Form table init failed:', err);
+});
+
+formController.initializeEnquiryTable().catch(err => {
+  console.error('Enquiry table init failed:', err);
+});
+
+
 // 404 handler
 app.use((req, res) => {
   res.status(404).json({ error: 'Not found' });

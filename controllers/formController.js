@@ -55,3 +55,39 @@ exports.initializeDatabase = async () => {
     throw error; // Rethrow to handle in app.js
   }
 };
+
+exports.submitEnquiry = async (req, res) => {
+  try {
+    const { email, date } = req.body;
+
+    if (!email || !date) {
+      return res.status(400).json({
+        error: 'Validation failed',
+        details: 'Email and date are required'
+      });
+    }
+
+    await Enquiry.create({ email, date });
+    res.status(200).json({
+      success: true,
+      message: 'Enquiry submitted successfully'
+    });
+  } catch (err) {
+    console.error('Error submitting enquiry:', err);
+    res.status(500).json({
+      error: 'Internal server error',
+      message: err.message || 'Something went wrong'
+    });
+  }
+};
+
+// add table init
+exports.initializeEnquiryTable = async () => {
+  try {
+    await Enquiry.setupTable();
+    console.log('Enquiry table initialized');
+  } catch (error) {
+    console.error('Error initializing enquiry table:', error);
+    throw error;
+  }
+};
