@@ -1,7 +1,7 @@
 const Form = require('../models/formModel');
 const Enquiry = require('../models/enquiryModel');
 
-eexports.submitForm = async (req, res, next) => {
+exports.submitForm = async (req, res, next) => {
   try {
     const { name, type, enquiry, companyName, phone, countryCode } = req.body;
 
