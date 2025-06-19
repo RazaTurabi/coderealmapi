@@ -1,4 +1,5 @@
 const Form = require('../models/formModel');
+const Enquiry = require('../models/enquiryModel');
 
 exports.submitForm = async (req, res, next) => {
   try {

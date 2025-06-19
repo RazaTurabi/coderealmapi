@@ -24,6 +24,8 @@ formController.initializeDatabase().catch(err => {
   console.error('Database initialization failed:', err);
 });
 
+formController.initializeEnquiryTable();
+
 formController.initializeDatabase().catch(err => {
   console.error('Form table init failed:', err);
 });
