@@ -15,22 +15,22 @@ class Form {
   }
 
   static async setupTable() {
-    // Drop table first if exists (since old data is useless)
-    await db.execute(`DROP TABLE IF EXISTS submissions`);
+  // Drop table first if exists
+  await db.execute(`DROP TABLE IF EXISTS submissions`);
 
-    // Create fresh new table with correct structure
-    await db.execute(`
-      CREATE TABLE submissions (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        name VARCHAR(255) NOT NULL,
-        type ENUM('company', 'individual') NOT NULL,
-        enquiry TEXT NOT NULL,
-        company_name VARCHAR(255) DEFAULT '',
-        country_code VARCHAR(10) DEFAULT '',
-        phone_number VARCHAR(20) DEFAULT '',
-        submission_date DATETIME NOT NULL
-      )
-    `);
+  // Then create it fresh
+  await db.execute(`
+    CREATE TABLE submissions (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      name VARCHAR(255) NOT NULL,
+      type ENUM('company', 'individual') NOT NULL,
+      enquiry TEXT NOT NULL,
+      company_name VARCHAR(255) DEFAULT '',
+      country_code VARCHAR(10) DEFAULT '',
+      phone_number VARCHAR(20) DEFAULT '',
+      submission_date DATETIME NOT NULL
+    )
+  `);
   }
 }
 
