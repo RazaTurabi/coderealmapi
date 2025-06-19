@@ -1,49 +1,48 @@
 const Form = require('../models/formModel');
 const Enquiry = require('../models/enquiryModel');
 
-exports.submitForm = async (req, res, next) => {
+eexports.submitForm = async (req, res, next) => {
   try {
-    const { name, type, enquiry, companyName } = req.body;
-    
-    // Validate required fields
-    if (!name || !type || !enquiry) {
-      return res.status(400).json({ 
+    const { name, type, enquiry, companyName, phone, countryCode } = req.body;
+
+    if (!name || !type || !enquiry || !phone || !countryCode) {
+      return res.status(400).json({
         error: 'Validation failed',
-        details: 'Name, type, and enquiry are required fields' 
+        details: 'All required fields must be provided'
       });
     }
-    
-    // Validate type
+
     if (!['company', 'individual'].includes(type)) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         error: 'Validation failed',
-        details: 'Type must be either "company" or "individual"' 
+        details: 'Type must be either "company" or "individual"'
       });
     }
-    
-    // Validate company name for company type
+
     if (type === 'company' && !companyName) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         error: 'Validation failed',
-        details: 'Company name is required for company type' 
+        details: 'Company name is required for company type'
       });
     }
-    
+
     const submission = {
       name,
       type,
       enquiry,
-      companyName: type === 'company' ? companyName : ''
+      companyName: type === 'company' ? companyName : '',
+      phone,
+      countryCode
     };
-    
+
     await Form.create(submission);
-    
-    res.status(200).json({ 
+
+    res.status(200).json({
       success: true,
-      message: 'Form submitted successfully' 
+      message: 'Form submitted successfully'
     });
   } catch (error) {
-    next(error); // Pass to error handler middleware
+    next(error);
   }
 };
 
